@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: backend-pod
-          image: image-registry.openshift-image-registry.svc:5000/amisha-jenkins/node-backend:8
+          image: docker.io/node-backend:latest
           ports:
             - containerPort: 5000
           env:
@@ -89,7 +89,7 @@ spec:
     spec:
       containers:
         - name: frontend-pod
-          image: image-registry.openshift-image-registry.svc:5000/amisha-jenkins/node-frontend:8
+          image: docker.io/node-frontend:latest
           ports:
             - containerPort: 3000
           env:
