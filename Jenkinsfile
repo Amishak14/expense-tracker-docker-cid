@@ -23,8 +23,10 @@ pipeline {
         sh 'git config user.name "${GITHUB_USERNAME}"'
         sh "cat manifest.yaml"
         echo "${TAG}"
-        sh "sed -i 's+image-registry.openshift-image-registry.svc:5000/amisha-jenkins/node-backend:.*+image-registry.openshift-image-registry.svc:5000/amisha-jenkins/node-backend:${TAG}+g' manifest.yaml"
-        sh "sed -i 's+image-registry.openshift-image-registry.svc:5000/amisha-jenkins/node-frontend:.*+image-registry.openshift-image-registry.svc:5000/amisha-jenkins/node-frontend:${TAG}+g' manifest.yaml"
+          sh "sed -i 's+docker.io/amishark/node-backend:.*+docker.io/amishark/node-backend:${TAG}+g' manifest.yaml"
+          sh "sed -i 's+docker.io/amishark/node-backend:.*+docker.io/amishark/node-frontend:${TAG}+g' manifest.yaml"
+       // sh "sed -i 's+image-registry.openshift-image-registry.svc:5000/amisha-jenkins/node-backend:.*+image-registry.openshift-image-registry.svc:5000/amisha-jenkins/node-backend:${TAG}+g' manifest.yaml"
+        //sh "sed -i 's+image-registry.openshift-image-registry.svc:5000/amisha-jenkins/node-frontend:.*+image-registry.openshift-image-registry.svc:5000/amisha-jenkins/node-frontend:${TAG}+g' manifest.yaml"
         sh "cat manifest.yaml"
         sh "git add ."
         sh "git commit -m 'done by jenkins job docker-pipeline' "
