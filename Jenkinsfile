@@ -13,7 +13,6 @@ pipeline {
         stage("update git"){
         steps{
             withCredentials([usernamePassword(credentialsId: 'my-git', passwordVariable: 'pass', usernameVariable: 'user')]) 
-            {
                   script {
                         env.encodedPass=URLEncoder.encode(pass, "UTF-8")
                           git config user.email "${GITHUB_EMAIL}"
