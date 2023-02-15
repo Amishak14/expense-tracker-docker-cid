@@ -33,7 +33,7 @@ pipeline {
          sh 'if (diff.empty)' {
          echo "No changes found. Skipping pull request creation."
                          }
-        else {
+       sh  'else' {
         sh "git add ."
         sh "git commit -m 'done by jenkins job docker-pipeline' "
        // sh "git pull"
