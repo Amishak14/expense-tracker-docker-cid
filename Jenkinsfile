@@ -21,11 +21,19 @@ pipeline {
                          echo "${TAG}"
           sed -i 's+image-registry.openshift-image-registry.svc:5000/amisha-jenkins/expense-tracker-backend:.*+image-registry.openshift-image-registry.svc:5000/amisha-jenkins/expense-tracker-backend:${TAG}+g' manifest.yaml
           sed -i 's+image-registry.openshift-image-registry.svc:5000/amisha-jenkins/expense-tracker-frontend:.*+image-registry.openshift-image-registry.svc:5000/amisha-jenkins/expense-tracker-frontend:${TAG}+g' manifest.yaml
-         "cat manifest.yaml"
+             "cat manifest.yaml"
+            def diffCmd = 'git diff --name-only main..branch'
+            def diff = sh(script: diffCmd, returnStdout: true).trim()
+            if (diff.empty) {
+                echo "No changes found. Skipping pull request creation."
+            }
+            else
+            {
+        
          "git add ."
          "git commit -m 'done by jenkins job docker-pipeline' "
           git push https://$user:$encodedPass@github.com/$user/expense-tracker-cd.git HEAD:branch
-                    }
+              }}
             }
         }
 
