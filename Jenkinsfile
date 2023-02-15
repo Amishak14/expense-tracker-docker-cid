@@ -12,7 +12,8 @@ pipeline {
 
         stage("update git"){
         steps{
-            withCredentials([usernamePassword(credentialsId: 'my-git', passwordVariable: 'pass', usernameVariable: 'user')]) {
+            withCredentials([usernamePassword(credentialsId: 'my-git', passwordVariable: 'pass', usernameVariable: 'user')]) 
+            {
                   script {
                         env.encodedPass=URLEncoder.encode(pass, "UTF-8")
                           git config user.email "${GITHUB_EMAIL}"
@@ -29,11 +30,12 @@ pipeline {
             }
             else
             {
-        
          "git add ."
          "git commit -m 'done by jenkins job docker-pipeline' "
           git push https://$user:$encodedPass@github.com/$user/expense-tracker-cd.git HEAD:branch
-              }}
+             }
+                  }}
+            
             }
         }
 
@@ -60,5 +62,7 @@ pipeline {
             }
         } 
     }  
+       
+        
         }
-}
+    }
